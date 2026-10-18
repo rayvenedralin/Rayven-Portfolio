@@ -627,10 +627,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setActiveNavSection(currentSection);
+
+    if (!isNavClicking && currentSection !== lastSavedSection) {
+      lastSavedSection = currentSection;
+      sessionStorage.setItem('portfolio_active_section', currentSection);
+      if (currentSection === 'home') {
+        history.replaceState(null, null, window.location.pathname + window.location.search);
+      } else {
+        history.replaceState(null, null, `#${currentSection}`);
+      }
+    }
   }
 
   let scrollTicking = false;
   let isNavClicking = false;
+  let lastSavedSection = '';
 
   window.addEventListener('scroll', () => {
     if (isNavClicking) return;
@@ -643,7 +654,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
-  // Handle Tab Click Immediately (Image 1 fix)
+  // Handle Tab Click Immediately
   navPills.forEach(pill => {
     pill.addEventListener('click', (e) => {
       const sectionId = pill.getAttribute('data-section');
@@ -651,10 +662,12 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         setActiveNavSection(sectionId);
         isNavClicking = true;
+        lastSavedSection = sectionId;
+        sessionStorage.setItem('portfolio_active_section', sectionId);
 
         if (sectionId === 'home') {
           window.scrollTo({ top: 0, behavior: 'smooth' });
-          history.replaceState(null, null, ' ');
+          history.replaceState(null, null, window.location.pathname + window.location.search);
         } else {
           const targetEl = document.getElementById(sectionId);
           if (targetEl) {
@@ -677,14 +690,70 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       setActiveNavSection('home');
+      lastSavedSection = 'home';
+      sessionStorage.setItem('portfolio_active_section', 'home');
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      history.replaceState(null, null, ' ');
+      history.replaceState(null, null, window.location.pathname + window.location.search);
     });
   });
 
-  // Initial update on page load
-  window.addEventListener('DOMContentLoaded', handleScrollNavigation);
-  handleScrollNavigation();
+  // Restore section on page load / refresh
+  function restoreSectionOnLoad() {
+    let targetSection = '';
+    const hash = window.location.hash ? window.location.hash.substring(1) : '';
+    if (hash && sectionIds.includes(hash)) {
+      targetSection = hash;
+    } else {
+      const saved = sessionStorage.getItem('portfolio_active_section');
+      if (saved && sectionIds.includes(saved)) {
+        targetSection = saved;
+      }
+    }
+
+    if (targetSection && targetSection !== 'home') {
+      const targetEl = document.getElementById(targetSection);
+      if (targetEl) {
+        setActiveNavSection(targetSection);
+        isNavClicking = true;
+        lastSavedSection = targetSection;
+
+        // Perform instant scroll to target section with header offset
+        const scrollToTarget = () => {
+          const headerHeight = header ? header.offsetHeight : 82;
+          const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - headerHeight;
+          window.scrollTo({ top: targetPos, behavior: 'instant' });
+          setActiveNavSection(targetSection);
+          setTimeout(() => {
+            isNavClicking = false;
+          }, 300);
+        };
+
+        // Scroll immediately and once again after render
+        scrollToTarget();
+        setTimeout(scrollToTarget, 100);
+        return;
+      }
+    }
+
+    handleScrollNavigation();
+  }
+
+  // Run restoration on load
+  restoreSectionOnLoad();
+
+  // Handle browser back/forward buttons
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash ? window.location.hash.substring(1) : 'home';
+    if (sectionIds.includes(hash)) {
+      setActiveNavSection(hash);
+      const targetEl = document.getElementById(hash);
+      if (targetEl) {
+        const headerHeight = header ? header.offsetHeight : 82;
+        const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - headerHeight;
+        window.scrollTo({ top: targetPos, behavior: 'smooth' });
+      }
+    }
+  });
 
   // --------------------------------------------------------------------------
   // 5. MOBILE DRAWER NAVIGATION
