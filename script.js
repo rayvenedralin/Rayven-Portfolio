@@ -1043,48 +1043,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'ArrowLeft') modalPrevBtn.click();
       if (e.key === 'ArrowRight') modalNextBtn.click();
     }
-    if (resumeModal && resumeModal.classList.contains('open')) {
-      if (e.key === 'Escape') closeResumeModal();
-    }
   });
 
-  // --------------------------------------------------------------------------
-  // 8. RESUME (CV) MODAL VIEWER
-  // --------------------------------------------------------------------------
-  const resumeModal = document.getElementById('resumeModal');
+  // Sound effect on external CV PDF download click
   const viewResumeBtn = document.getElementById('viewResumeBtn');
-  const resumeCloseBtn = document.getElementById('resumeCloseBtn');
-  const printResumeBtn = document.getElementById('printResumeBtn');
-
-  function openResumeModal() {
-    if (!resumeModal) return;
-    resumeModal.classList.add('open');
-    resumeModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    playPopSound(500, 'sine');
-  }
-
-  function closeResumeModal() {
-    if (!resumeModal) return;
-    resumeModal.classList.remove('open');
-    resumeModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
   if (viewResumeBtn) {
     viewResumeBtn.addEventListener('click', () => {
       playPopSound(500, 'sine');
-    });
-  }
-  if (resumeCloseBtn) resumeCloseBtn.addEventListener('click', closeResumeModal);
-  if (resumeModal) {
-    resumeModal.addEventListener('click', (e) => {
-      if (e.target === resumeModal) closeResumeModal();
-    });
-  }
-  if (printResumeBtn) {
-    printResumeBtn.addEventListener('click', () => {
-      window.print();
     });
   }
 
