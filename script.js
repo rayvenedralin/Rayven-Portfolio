@@ -1176,25 +1176,48 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Simulate sending with tactile button state
+      // Real transmission with tactile button state
       submitBtn.disabled = true;
       const spinner = submitBtn.querySelector('.submit-spinner');
       const submitText = submitBtn.querySelector('.submit-text');
       if (spinner) spinner.style.display = 'inline-block';
-      if (submitText) submitText.textContent = 'Transmitting Brief...';
+      if (submitText) submitText.textContent = 'Transmitting Message...';
       playPopSound(600, 'triangle');
 
-      setTimeout(() => {
-        contactForm.style.display = 'none';
-        formSuccess.classList.add('visible');
-        showToast('Message Dispatched! Chat soon!', '');
-        playPopSound(800, 'sine', 0.2);
+      const payload = {
+        name: userName.value.trim(),
+        email: userEmail.value.trim(),
+        service: serviceSelect.value,
+        message: projectDetails.value.trim(),
+        _subject: `Portfolio Inquiry: ${serviceSelect.value} from ${userName.value.trim()}`,
+        _captcha: 'false',
+        _template: 'table'
+      };
 
-        // Reset button state
+      fetch('https://formsubmit.co/ajax/rayvenedburato@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(async (res) => {
+        await res.json().catch(() => ({}));
         submitBtn.disabled = false;
         if (spinner) spinner.style.display = 'none';
         if (submitText) submitText.textContent = 'Send Message';
-      }, 900);
+
+        contactForm.style.display = 'none';
+        formSuccess.classList.add('visible');
+        showToast('Message Dispatched to Rayven!', '');
+        playPopSound(800, 'sine', 0.2);
+        contactForm.reset();
+      })
+      .catch((err) => {
+        console.warn('AJAX submit issue, using native form submit fallback', err);
+        contactForm.submit();
+      });
     });
 
     // Clear validation errors on input
