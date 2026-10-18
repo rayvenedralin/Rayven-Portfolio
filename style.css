@@ -72,7 +72,9 @@
 /* --------------------------------------------------------------------------
    2. GLOBAL BASE & RESET
    -------------------------------------------------------------------------- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -107,7 +109,7 @@ body {
   z-index: 0;
   opacity: 1;
   background-size: 28px 28px;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(26, 26, 26, 0.075) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(26, 26, 26, 0.075) 1px, transparent 1px);
 }
@@ -138,7 +140,12 @@ ul {
 /* --------------------------------------------------------------------------
    3. TYPOGRAPHY & HIGHLIGHTS
    -------------------------------------------------------------------------- */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   font-weight: 700;
   color: var(--text-dark);
@@ -313,12 +320,35 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
 }
 
-.bg-yellow { background-color: var(--yellow-sunshine); color: var(--text-dark); }
-.bg-pink { background-color: var(--pink-bubblegum); color: #FFFFFF; }
-.bg-mint { background-color: var(--mint-green); color: #FFFFFF; }
-.bg-blue { background-color: var(--blue-electric); color: #FFFFFF; }
-.bg-white { background-color: #FFFFFF; color: var(--text-dark); }
-.bg-purple { background-color: var(--purple-pop); color: #FFFFFF; }
+.bg-yellow {
+  background-color: var(--yellow-sunshine);
+  color: var(--text-dark);
+}
+
+.bg-pink {
+  background-color: var(--pink-bubblegum);
+  color: #FFFFFF;
+}
+
+.bg-mint {
+  background-color: var(--mint-green);
+  color: #FFFFFF;
+}
+
+.bg-blue {
+  background-color: var(--blue-electric);
+  color: #FFFFFF;
+}
+
+.bg-white {
+  background-color: #FFFFFF;
+  color: var(--text-dark);
+}
+
+.bg-purple {
+  background-color: var(--purple-pop);
+  color: #FFFFFF;
+}
 
 /* --------------------------------------------------------------------------
    6. SITE HEADER & NAVIGATION
@@ -357,7 +387,8 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--yellow-sunshine); /* #DAFA01 */
+  background: var(--yellow-sunshine);
+  /* #DAFA01 */
   border: 3px solid #1A1A1A;
   border-radius: 12px;
   padding: 6px 20px;
@@ -1010,9 +1041,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes pulseGreen {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
 }
 
 .portrait-image-wrap {
@@ -1163,9 +1205,17 @@ h1, h2, h3, h4, h5, h6 {
   gap: 8px;
 }
 
-.mt-4 { margin-top: 24px; }
-.mt-3 { margin-top: 16px; }
-.mt-2 { margin-top: 8px; }
+.mt-4 {
+  margin-top: 24px;
+}
+
+.mt-3 {
+  margin-top: 16px;
+}
+
+.mt-2 {
+  margin-top: 8px;
+}
 
 .skills-cloud {
   display: flex;
@@ -1490,7 +1540,8 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--pink-bubblegum);
 }
 
-.input-wrapper, .select-wrapper {
+.input-wrapper,
+.select-wrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -1504,7 +1555,9 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 2;
 }
 
-.form-input, .form-select, .form-textarea {
+.form-input,
+.form-select,
+.form-textarea {
   width: 100%;
   background: var(--bg-cream);
   border: var(--border-black);
@@ -1521,14 +1574,18 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 44px;
 }
 
-.form-input:focus, .form-select:focus, .form-textarea:focus {
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
   outline: none;
   background: #FFFFFF;
   border-color: #1A1A1A;
   box-shadow: 4px 4px 0px var(--yellow-sunshine);
 }
 
-.form-input.is-invalid, .form-select.is-invalid, .form-textarea.is-invalid {
+.form-input.is-invalid,
+.form-select.is-invalid,
+.form-textarea.is-invalid {
   border-color: #EF4444;
   background-color: #FEF2F2;
 }
@@ -1568,7 +1625,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Success Banner */
@@ -2368,74 +2427,6 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.95rem;
 }
 
-.resume-contact-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  font-size: 0.85rem;
-  color: var(--text-dark);
-  font-weight: 600;
-  margin-top: 8px;
-}
-
-.entry-sub {
-  font-size: 0.86rem;
-  font-weight: 700;
-  color: #4A5568;
-  margin-bottom: 8px;
-}
-
-.resume-bullet-list {
-  margin: 8px 0 0;
-  padding-left: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.resume-bullet-list li {
-  list-style-type: disc;
-}
-
-.resume-skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 14px;
-}
-
-.resume-skill-card {
-  background: var(--bg-cream);
-  border: var(--border-black);
-  border-radius: var(--radius-md);
-  padding: 14px 18px;
-  box-shadow: 2px 2px 0px #1A1A1A;
-}
-
-.resume-skill-card strong {
-  display: block;
-  font-size: 1rem;
-  margin-bottom: 6px;
-  color: var(--text-dark);
-}
-
-.resume-skill-card p {
-  font-size: 0.90rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin: 0;
-}
-
-.personal-info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 10px;
-  font-size: 0.92rem;
-  color: var(--text-dark);
-}
-
 /* --------------------------------------------------------------------------
    16. TOAST NOTIFICATIONS & BACK TO TOP
    -------------------------------------------------------------------------- */
@@ -2646,7 +2637,9 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
   }
 
-  .hero-badge-wrap, .hero-cta-group, .hero-stats-row {
+  .hero-badge-wrap,
+  .hero-cta-group,
+  .hero-stats-row {
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
@@ -2698,7 +2691,8 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
   }
 
-  .brand-logo, .header-right {
+  .brand-logo,
+  .header-right {
     min-width: auto;
   }
 
@@ -2784,7 +2778,9 @@ h1, h2, h3, h4, h5, h6 {
     height: 2px;
   }
 
-  .bio-card, .process-wrapper, .contact-form {
+  .bio-card,
+  .process-wrapper,
+  .contact-form {
     padding: 24px 18px;
   }
 
@@ -2899,6 +2895,7 @@ h1, h2, h3, h4, h5, h6 {
   .certificates-grid {
     grid-template-columns: 1fr;
   }
+
   .certificate-preview-wrap {
     height: 380px;
   }
@@ -2909,9 +2906,12 @@ h1, h2, h3, h4, h5, h6 {
   body * {
     visibility: hidden;
   }
-  #resumeModal, #resumeModal * {
+
+  #resumeModal,
+  #resumeModal * {
     visibility: visible;
   }
+
   #resumeModal {
     position: absolute;
     left: 0;
@@ -2921,9 +2921,12 @@ h1, h2, h3, h4, h5, h6 {
     backdrop-filter: none;
     padding: 0;
   }
-  .modal-top-bar, #printResumeBtn {
+
+  .modal-top-bar,
+  #printResumeBtn {
     display: none !important;
   }
+
   .modal-window {
     box-shadow: none !important;
     border: none !important;

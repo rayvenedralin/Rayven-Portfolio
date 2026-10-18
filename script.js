@@ -1071,7 +1071,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
-  if (viewResumeBtn) viewResumeBtn.addEventListener('click', openResumeModal);
+  if (viewResumeBtn) {
+    viewResumeBtn.addEventListener('click', () => {
+      playPopSound(500, 'sine');
+    });
+  }
   if (resumeCloseBtn) resumeCloseBtn.addEventListener('click', closeResumeModal);
   if (resumeModal) {
     resumeModal.addEventListener('click', (e) => {
